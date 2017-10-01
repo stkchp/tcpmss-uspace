@@ -20,16 +20,19 @@
  */
 
 #include <errno.h>
-#include <linux/netfilter.h> /* for NF_ACCEPT */
-#include <linux/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <unistd.h>
+
 #include <netinet/ether.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+
+#include <linux/netfilter.h> /* for NF_ACCEPT */
+#include <linux/types.h>
 
 #include <libnetfilter_queue/libnetfilter_queue.h>
 
@@ -221,7 +224,7 @@ int main(int argc, char **argv) {
     break;
   }
 
-  printf("unbinding from queue 0\n");
+  printf("unbinding from queue %d\n", queue);
   nfq_destroy_queue(qh);
 
   printf("closing library handle\n");
